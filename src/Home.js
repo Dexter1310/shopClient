@@ -19,7 +19,6 @@ const Home = () => {
             <button onClick={() => setName('paco')}>change name</button> */}
             <Users/>
 
-
         </div>
 
     );
