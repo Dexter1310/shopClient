@@ -3,12 +3,13 @@ import { icons } from "react-icons";
 import { Link } from "react-router-dom";
 import { Users } from "../Users";
 import { UserForm } from "./UserForm";
-
+import { Profile } from "./Profile";
 
 
 class Navigation extends Component {
     constructor(props) {
         super(props);
+      
     }
     render() {
 
@@ -19,14 +20,16 @@ class Navigation extends Component {
                     <div className="links text-white">
                         <Link to="/">Lista usuarios</Link>
                         <Link to="/created">New User</Link>
-                        <span className="badge badge-pill badge-light ml-2">{i}
+                        <span className="badge badge-pill badge-light ml-2"> usuarios: {i}
                         </span>
                     </div>
+                   <div className="text-right">{this.props.profile}</div> 
+                   <div className="text-right">{this.props.logout}</div> 
+                   
                     <div className="links text-white text-left">
-                        <Link style={{  color: 'white' }} to="/login">Login</Link>
+                       {this.props.btnNav}
                     </div>
                 </nav>
-
             </div>
         )
     }

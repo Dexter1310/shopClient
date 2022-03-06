@@ -1,6 +1,6 @@
 import React from 'react';
 import { API_BASE_URL } from './config';
-
+import Navigation from './components/Navigation';
 
 class Users extends React.Component {
 
@@ -46,6 +46,7 @@ class Users extends React.Component {
 
     render() {
 
+        
         return (
             <section>
                 <div className='container' >

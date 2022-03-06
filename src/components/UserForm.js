@@ -12,35 +12,75 @@ class UserForm extends Component {
         this.state = {
             nom: '',
             lastName: '',
-            email: '',
+            mail: '',
             buttonSubmit: 'Agregar',
             id: null,
-            title:'Registro gratuito',
-   
+            title: 'Registro gratuito',
+            errors: {},
+            pass:'',
+            pass2:'',
+
 
         }
 
     }
 
     async componentDidMount() {
-        const data=[];
+        const data = [];
 
         if (this.props.id) {//edit user 
             const resUser = await fetch(API_BASE_URL + '/api/user/' + this.props.id);
             const data = await resUser.json();
             this.state.buttonSubmit = 'Modifica';
-            this.state.nom=data.name;this.state.lastName=data.lastname;
-            this.state.title = 'Modifica el usuario '+data.name+' '+ data.lastname;
-            this.setState(data);
+           
+            this.state.nom = data.name; this.state.lastName = data.lastname; this.setState({mail:data.email});
+            this.state.title = 'Modifica el usuario ' + data.name + ' ' + data.lastname;
+         
+
         }
 
     }
 
 
-    handleInput(e) {
+  async  handleInput(e) {
 
         const { value, name } = e.target;
         this.setState({ [name]: value });
+
+        let errors = {};
+        let formIsValid = false;
+
+
+        //Name
+        if (this.state.nom.length <1 ) {
+            this.state.errors['nom'] = 'Debes añadir un nombre';
+        } else if (!this.state.nom.match(/^[a-zA-Z]+$/)) {
+            this.state.errors['nom'] = 'Debe contener solo letras ';
+        } else {
+            this.state.errors['nom'] = '';
+            formIsValid=true;
+        }
+
+        //lastName
+        if (this.state.lastName.length <1) {
+            this.state.errors['lastName'] = 'Debes añadir algún  apellido ';
+        } else if (!this.state.lastName.match(/^[a-zA-Z]+$/)) {
+            this.state.errors['lastName'] = 'Debe contener solo letras ';
+        } else {
+            this.state.errors['lastName'] = '';
+            formIsValid=true;
+        }
+
+        //password
+ console.log('contraseña 1: '+this.state.pass);
+ console.log('contraseña 2: '+this.state.pass2);
+ this.state.errors['pass'] = '';
+
+
+        if(this.state.pass != this.state.pass2 ){
+            this.state.errors['pass'] = 'La contraseña no coincide';
+        }
+
 
     }
 
@@ -52,19 +92,15 @@ class UserForm extends Component {
         }
 
         const us = JSON.stringify(this.state);
- 
         const response = await fetch(API_BASE_URL + '/api/addUser', {
             method: "post",
             body: us
         });
-        window.location.href='/';
+        window.location.href = '/';
     }
 
 
-
     render() {
-
-
 
         return (
 
@@ -72,8 +108,11 @@ class UserForm extends Component {
                 <h4>{this.state.title}</h4>
                 <form className="card-body" method='post' action='/' name='user' onSubmit={(e) => this.handleSubmit(e)}>
                     <div className="row">
+
                         <div className="form-group col-6">
+                            <small style={{ color: "red" }}>{this.state.errors['nom']}</small>
                             <input
+                                required
                                 type='text'
                                 name='nom'
                                 className="form-control"
@@ -85,7 +124,9 @@ class UserForm extends Component {
                         </div>
 
                         <div className="form-group col-6">
+                            <small style={{ color: "red" }}>{this.state.errors['lastName']}</small>
                             <input
+                                required
                                 type='text'
                                 name='lastName'
                                 className="form-control"
@@ -96,19 +137,52 @@ class UserForm extends Component {
 
                         </div>
                     </div>
+
+
                     <div className="row mt-3">
                         <div className="form-group col-6">
                             <input
+                                required
+                                type='password'
+                                name='pass'
+                                className="form-control"
+                                placeholder='Contraseña'
+                                value={this.state.pass}
+                                onChange={(e) => this.handleInput(e)}
+                                
+                            />
+
+                        </div>
+
+                        <div className="form-group col-6">
+                            <input
+                                required
+                                type='password'
+                                name='pass2'
+                                className="form-control"
+                                placeholder='Repita contraseña'
+                                value={this.state.pass2}
+                                onChange={(e) => this.handleInput(e)}
+                                
+                            />
+
+                        </div>
+                    </div>
+                    <div className="row mt-3">
+                        <div className="form-group col-6">
+                            <input
+                                required
                                 type='email'
-                                name='email'
+                                name='mail'
                                 className="form-control"
                                 placeholder='Email'
-                                value={this.state.email}
+                                value={this.state.mail}
                                 onChange={(e) => this.handleInput(e)}
                             />
                         </div>
                         <div className="col-6">
-                            <button className="btn btn-dark" type="submit">{this.state.buttonSubmit}</button>
+                            <button className="btn btn-dark" type="submit" >{this.state.buttonSubmit}</button>
+                            <p><small style={{ color: "red" }}>{this.state.errors['pass']}</small></p>
                         </div>
                     </div>
                 </form>

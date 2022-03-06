@@ -24,18 +24,15 @@ export default class Login extends Component {
             method: "post",
             body: login
         });
-        console.log(login);
-       
+
     }
 
 
 
     render() {
         return (
-            <div className='container mt-5'>
-
+            <div className='container mt-5 bg-danger'>
                 <form className="card-body" method='post' name='login' onSubmit={(e) => this.handleSubmit(e)}>
-
                     <div className="row mt-3">
                         <div className="form-group col-6">
                             <input
