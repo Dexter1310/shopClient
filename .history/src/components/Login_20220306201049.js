@@ -24,9 +24,7 @@ export default class Login extends Component {
             method: "post",
             body: login
         });
-
-        
-
+uy
     }
 
 

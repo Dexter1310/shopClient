@@ -5,6 +5,5 @@ export const Logout = () => {
     const {logout,isAuthenticated}= useAuth0()
   return (
     <button className='btn btn-danger' onClick={()=>logout()}>Logout</button>
-    
   )
 }
