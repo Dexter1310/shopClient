@@ -4,30 +4,33 @@ import { Link } from "react-router-dom";
 import { Users } from "../Users";
 import { UserForm } from "./UserForm";
 import { Profile } from "./Profile";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 class Navigation extends Component {
+
     constructor(props) {
         super(props);
-      
+
     }
+
+
     render() {
 
-        var i=this.props.contador;
+        var i = this.props.contador;
+        var profile = this.props.profile;
+
         return (
+
             <div>
                 <nav className="navbar navbar-dark bg-dark">
                     <div className="links text-white">
-                        <Link to="/">Lista usuarios</Link>
-                        <Link to="/created">New User</Link>
-                        <span className="badge badge-pill badge-light ml-2"> usuarios: {i}
-                        </span>
+                   <Links />
+                   usuarios: {i}
                     </div>
-                   <div className="text-right">{this.props.profile}</div> 
-                   <div className="text-right">{this.props.logout}</div> 
-                   
+                    <div className="text-right">{profile}</div>
                     <div className="links text-white text-left">
-                       {this.props.btnNav}
+                        {this.props.btnNav}
                     </div>
                 </nav>
             </div>
@@ -37,3 +40,18 @@ class Navigation extends Component {
 }
 
 export default Navigation;
+export const Links = () => {
+    const { user, isAuthenticated } = useAuth0();
+    
+    return (
+        isAuthenticated && (
+            <section>
+                <Link to="/">Lista usuarios</Link>
+                <Link to="/created">New User </Link>
+            </section>
+        )
+    )
+
+
+}
+

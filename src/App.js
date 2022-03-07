@@ -16,7 +16,8 @@ import {
 import Login from './components/Login';
 import { LoginButton } from './components/LoginButton';
 import { Profile } from './components/Profile';
-import { Logout } from './components/Logout';
+
+
 
 
 const API_BASE_URL = 'http://localhost:8000';
@@ -30,7 +31,7 @@ class App extends Component {
       contador: 0,
       // btnNav: <Link style={{ color: 'white' }} to="/login">Login</Link>,
       btnNav: <LoginButton />,
-      profile:<Profile />
+      profile:<Profile/>
 
     }
   }
@@ -46,7 +47,7 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter>
-          <Navigation contador={this.state.contador} btnNav={this.state.btnNav}  profile={this.state.profile} />
+          <Navigation contador={this.state.contador} btnNav={this.state.btnNav}  profile={this.state.profile} auth0={this.props.auth0} />
           <Routes>
             <Route exact path="/" element={<Users parentCallback={this.callbackFunction} />}>
             </Route>
@@ -56,8 +57,8 @@ class App extends Component {
             </Route>
             <Route exact path="/delete/:id" element={<DeleteUser />}>
             </Route>
-            <Route exact path="/login" element={<Login getBtnNav={this.btnNavAction} />}>
-            </Route>
+            {/* <Route exact path="/login" element={<Login getBtnNav={this.btnNavAction} />}>
+            </Route> */}
           </Routes>
         </BrowserRouter>
       </div>

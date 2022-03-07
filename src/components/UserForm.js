@@ -72,8 +72,8 @@ class UserForm extends Component {
         }
 
         //password
- console.log('contraseña 1: '+this.state.pass);
- console.log('contraseña 2: '+this.state.pass2);
+//  console.log('contraseña 1: '+this.state.pass);
+//  console.log('contraseña 2: '+this.state.pass2);
  this.state.errors['pass'] = '';
 
 

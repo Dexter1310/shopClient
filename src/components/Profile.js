@@ -8,24 +8,16 @@ export const Profile = () => {
     const { user, isAuthenticated } = useAuth0();
 
     return (
-        
-
-
-        
 
         isAuthenticated && (
-            
             <div>
                 {console.log(user.email_verified)}
-                <span style={{ color: "red" }}>{user.given_name} {user.email_verified}</span>
+                <span style={{ color: "red" }}>{user.given_name}  {user.family_name}</span>
+                <br></br>
+                <small style={{ color: "yellow" }}>{user.email}</small>
 
             </div>
+
         )
-
-
-
-        // isAuthenticated ? <div className='text-light'> logged in </div> : <div className='text-light'>logged out</div>
-
-
     )
 }
