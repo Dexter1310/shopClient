@@ -4,10 +4,9 @@ import { Logout } from './Logout';
 export const LoginButton = () => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   return (
-
+    
     isAuthenticated ? // if user is authentificated
-
-      <Logout /> 
+      <Logout />  
       :
       <button className='btn btn-warning' onClick={() => loginWithRedirect()}>login</button>
       

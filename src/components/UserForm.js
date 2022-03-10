@@ -17,12 +17,9 @@ class UserForm extends Component {
             id: null,
             title: 'Registro gratuito',
             errors: {},
-            pass:'',
-            pass2:'',
-
-
+            pass: '',
+            pass2: '',
         }
-
     }
 
     async componentDidMount() {
@@ -32,17 +29,17 @@ class UserForm extends Component {
             const resUser = await fetch(API_BASE_URL + '/api/user/' + this.props.id);
             const data = await resUser.json();
             this.state.buttonSubmit = 'Modifica';
-           
-            this.state.nom = data.name; this.state.lastName = data.lastname; this.setState({mail:data.email});
+
+            this.state.nom = data.name; this.state.lastName = data.lastname; this.setState({ mail: data.email });
             this.state.title = 'Modifica el usuario ' + data.name + ' ' + data.lastname;
-         
+
 
         }
 
     }
 
 
-  async  handleInput(e) {
+    async handleInput(e) {
 
         const { value, name } = e.target;
         this.setState({ [name]: value });
@@ -51,33 +48,33 @@ class UserForm extends Component {
         let formIsValid = false;
 
 
-        //Name
-        if (this.state.nom.length <1 ) {
-            this.state.errors['nom'] = 'Debes añadir un nombre';
-        } else if (!this.state.nom.match(/^[a-zA-Z]+$/)) {
-            this.state.errors['nom'] = 'Debe contener solo letras ';
-        } else {
-            this.state.errors['nom'] = '';
-            formIsValid=true;
-        }
+        // //Name
+        // if (this.state.nom.length < 1) {
+        //     this.state.errors['nom'] = 'Debes añadir un nombre';
+        // } else if (!this.state.nom.match(/^[a-zA-Z]+$/)) {
+        //     this.state.errors['nom'] = 'Debe contener solo letras ';
+        // } else {
+        //     this.state.errors['nom'] = '';
+        //     formIsValid = true;
+        // }
 
-        //lastName
-        if (this.state.lastName.length <1) {
-            this.state.errors['lastName'] = 'Debes añadir algún  apellido ';
-        } else if (!this.state.lastName.match(/^[a-zA-Z]+$/)) {
-            this.state.errors['lastName'] = 'Debe contener solo letras ';
-        } else {
-            this.state.errors['lastName'] = '';
-            formIsValid=true;
-        }
+        // //lastName
+        // if (this.state.lastName.length < 1) {
+        //     this.state.errors['lastName'] = 'Debes añadir algún  apellido ';
+        // } else if (!this.state.lastName.match(/^[a-zA-Z]+$/)) {
+        //     this.state.errors['lastName'] = 'Debe contener solo letras ';
+        // } else {
+        //     this.state.errors['lastName'] = '';
+        //     formIsValid = true;
+        // }
 
         //password
-//  console.log('contraseña 1: '+this.state.pass);
-//  console.log('contraseña 2: '+this.state.pass2);
- this.state.errors['pass'] = '';
+        //  console.log('contraseña 1: '+this.state.pass);
+        //  console.log('contraseña 2: '+this.state.pass2);
+        this.state.errors['pass'] = '';
 
 
-        if(this.state.pass != this.state.pass2 ){
+        if (this.state.pass != this.state.pass2) {
             this.state.errors['pass'] = 'La contraseña no coincide';
         }
 
@@ -96,7 +93,7 @@ class UserForm extends Component {
             method: "post",
             body: us
         });
-        window.location.href = '/';
+        // window.location.href = '/';
     }
 
 
@@ -149,7 +146,7 @@ class UserForm extends Component {
                                 placeholder='Contraseña'
                                 value={this.state.pass}
                                 onChange={(e) => this.handleInput(e)}
-                                
+
                             />
 
                         </div>
@@ -163,7 +160,7 @@ class UserForm extends Component {
                                 placeholder='Repita contraseña'
                                 value={this.state.pass2}
                                 onChange={(e) => this.handleInput(e)}
-                                
+
                             />
 
                         </div>
@@ -182,7 +179,7 @@ class UserForm extends Component {
                         </div>
                         <div className="col-6">
                             <button className="btn btn-dark" type="submit" >{this.state.buttonSubmit}</button>
-                            <p><small style={{ color: "red" }}>{this.state.errors['pass']}</small></p>
+                            {/* <p><small style={{ color: "red" }}>{this.state.errors['pass']}</small></p> */}
                         </div>
                     </div>
                 </form>

@@ -11,15 +11,11 @@ class Navigation extends Component {
 
     constructor(props) {
         super(props);
-
     }
 
-
     render() {
-
         var i = this.props.contador;
         var profile = this.props.profile;
-
         return (
 
             <div>
@@ -36,7 +32,6 @@ class Navigation extends Component {
             </div>
         )
     }
-
 }
 
 export default Navigation;

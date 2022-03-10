@@ -11,7 +11,7 @@ const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 
 ReactDOM.render(
   <React.StrictMode>
-    <Auth0Provider domain={domain} clientId={client_id} redirectUri={window.location.origin} >
+    <Auth0Provider domain={domain} clientId={client_id} redirectUri={window.location.origin}>
       <App />
     </Auth0Provider>
   </React.StrictMode>,
