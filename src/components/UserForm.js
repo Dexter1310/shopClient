@@ -93,7 +93,7 @@ class UserForm extends Component {
             method: "post",
             body: us
         });
-        // window.location.href = '/';
+        window.location.href = '/';
     }
 
 
